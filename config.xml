@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "info.time-house.calculate"
+        versionCode="10" 
+        version   = "1.0.1">
+
+    <!-- versionCode is optional and Android only -->
+
+    <name>Time House Calculate</name>
+
+    <description>
+        Приложение для расчета стоимости в кафе провременной оплаты
+    </description>
+    <preference name="fullscreen" value="true" />
+    <gap:splash src="splash.png" />
+    <icon src="logo.jpg" />
+    <author href="http://github.com/evgenKorobkov" email="evgenKorobkov@gmail.com">
+
+    Evgeny Korobkov
+    </author>
+
+</widget>

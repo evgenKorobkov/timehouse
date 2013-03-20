@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <title>
+        </title>
+        <link rel="stylesheet" href="jquery.mobile-1.2.0.min.css" />
+        <link rel="stylesheet" href="my.css" />
+        <script src="jquery-1.7.2.min.js">
+        </script>
+        <script src="jquery.mobile-1.2.0.min.js">
+        </script>
+        <script src="my.js">
+        </script>
+        <!-- User-generated css -->
+        <style>
+        </style>
+        <!-- User-generated js -->
+        <script>
+            try {
+
+    $(function() {
+
+    });
+
+  } catch (error) {
+    console.error("Your javascript has an error: " + error);
+  }
+        </script>
+    </head>
+    <body>
+        <!-- Home -->
+        <div data-role="page" id="page1">
+            <div data-role="content">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="slider2">
+                            Сколько человек: 
+                        </label>
+                        <input type="range" class="count_men" name="slider" value="4" min="1" max="20" data-highlight="false" />
+                    </fieldset>
+                </div>
+                <h2>
+                    Время прихода:
+                </h2>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="slider1">
+                            Часы:
+                        </label>
+                        <input type="range" name="slider" class="Hours" value="1" min="0" max="24" data-highlight="true" />
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <label for="slider3">
+                            Минуты:
+                        </label>
+                        <input type="range" class="Minutes" name="slider" value="00" min="0" max="60" data-highlight="true" />
+                    </fieldset>
+                </div>
+                <div id="checkboxes1" data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-type="vertical">
+                        <legend>
+                            Опции
+                        </legend>
+                        <input id="checkbox2" class="students" name="Students" type="checkbox" />
+                        <label for="checkbox2">
+                            Студент
+                        </label>
+                    </fieldset>
+                </div>
+                <a data-role="button" href="#" onclick="calculate()" data-icon="check" data-iconpos="left">
+                    Calculate
+                </a>
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <h3>
+                    <a href="http://time-house.info" target="_blank">Time House</a> 
+                </h3>
+            </div>
+        </div>
+        <script type="text/javascript" charset="utf-8">
+        $(document).ready( function() {
+            var now = new Date();
+            $(".Hours").val( now.getHours() );
+            $(".Minutes").val( now.getMinutes() );
+            //todo: поставить "валики" в нужное положение
+
+        });
+
+        function calculate() {
+            var count_men = parseInt( $(".count_men").val() );
+            var price = 0;
+            var price_fist_hours = 2;
+            var price_of_minutes = 1;
+
+            var time = new Date();
+            var now_time = time.getHours() * 60 + time.getMinutes();
+            var h = $(".Hours").val();
+            var m = $(".Minutes").val();
+            var start_time = parseInt(h) * 60 + parseInt(m);
+            var count_minutes = now_time - start_time;
+            var student = $(".students").is(":checked");
+            var minutes = count_minutes; 
+
+            //не правильно считается при переходе из 23->0 (полночь)
+            //student не работает как надо - не checked (всегда on)
+            if (count_minutes >= 30) {
+                price = price_fist_hours * 30;
+                count_minutes -= 30;
+            }
+            else price = price_fist_hours * count_minutes;
+
+            if (count_minutes > 0) {
+                price += count_minutes * price_of_minutes;
+            } 
+
+            if (student) {
+                price = count_minutes * price_of_minutes;
+            } 
+            price *= count_men;
+            alert("Время: "+ minutes + " минут, Стоимость: " +price + " Руб");
+
+        }
+        </script>
+    </body>
+</html>
